@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        .container{
+            border: 1px solid black;
+            width: 50%;
+            margin:auto;
+        }
+        .num{
+            margin-top: 10px;
+            
+            padding: 10px;
+        }
+        .num button{
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 32%;
+            padding: 10px;
+        }
+        #input{
+            margin:5px;
+            border: 1px solid black;
+            padding-right: 3px;
+            font-size: 60px;
+            direction: rtl;
+            background-color:rgb(239, 236, 231);
+            font-family:serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p id="input">0</p>
+        <div class="num">
+            <button id="btnClear" onclick="clearBtn()">C</button>
+            <button id="btn_square" onclick="squareBtn()">sqr</button>
+            <button id="btnDel" onclick="deleteBtn()">Del</button>
+
+
+            <button id="btn7" onclick="input(btn7)">7</button>
+            <button id="btn8" onclick="input(btn8)">8</button>
+            <button id="btn9" onclick="input(btn9)">9</button>
+
+            <button id="btn4" onclick="input(btn4)">4</button>
+            <button id="btn5" onclick="input(btn5)">5</button>
+            <button id="btn6" onclick="input(btn6)">6</button>
+            
+            
+            <button id="btn1" onclick="input(btn1)">1</button>
+            <button id="btn2" onclick="input(btn2)">2</button>
+            <button id="btn3" onclick="input(btn3)">3</button>
+            <button id="btn0" onclick="input(btn0)">0</button>
+            
+            
+
+            <button id="btn_addition" onclick="addBtn()">+</button>
+            <button id="btn_subtract" onclick="minusBtn()">-</button>
+            <button id="btn_division" onclick="divideBtn()">÷</button>
+            <button id="btn_subtract" onclick="multiplyBtn()">x</button>
+            <button id="btnEqual" onclick="equalBtn()">=</button>
+            
+        </div>
+    </div>
+    <script>
+        let numValue = "";
+        let numLimit = 10;
+        let len_numValue = numValue.length;
+        let use_function;
+        let _input = document.querySelector("#input");
+         
+        const btn1 = document.querySelector("#btn1");
+        const btn2 = document.querySelector("#btn2");
+        const btn3 = document.querySelector("#btn3");
+        const btn4 = document.querySelector("#btn4");
+        const btn5 = document.querySelector("#btn5");
+        const btn6 = document.querySelector("#btn6");
+        const btn7 = document.querySelector("#btn7");
+        const btn8 = document.querySelector("#btn8");
+        const btn9 = document.querySelector("#btn9");
+        const btn0 = document.querySelector("#btn0");
+        
+        
+        let temp;
+        let operation = [];
+        let _signs;
+
+        function input(value){
+            if(use_function){
+                numValue = "";
+                use_function = false;
+            }
+            // numValue += numValue.replace(numValue, value.innerText);
+            if(_input.innerText.length > numLimit){
+                alert("Limit reached");
+            }else{
+                numValue += value.innerText;
+                _input.innerText = numValue;
+                // console.log(_input.innerText.length);
+            }
+        }
+        function clearBtn(){
+            numValue = "";
+            _input.innerText = 0;
+        }
+        function deleteBtn(){
+            if(numValue.length != 0){
+                if(numValue.length == 1){
+                    _input.innerText = 0;
+                }else{
+                    numValue = numValue.slice(0, numValue.length - 1);
+                    _input.innerText = numValue;
+                }
+            }else if(numValue == 0){
+                _input.innerText = 0;
+            }
+        }
+        function squareBtn(){
+            numValue *= numValue;
+            _input.innerText = numValue;
+            use_function = true;
+        }
+        function addBtn(){
+            temp = "";
+            temp = numValue;
+            numValue = "";
+            _input.innerText = temp;
+            _signs = "+";
+            
+        }
+        function minusBtn(){
+            temp = "";
+            temp = numValue;
+            numValue = "";
+            _input.innerText = temp;
+            _signs = "-";
+
+        }
+        function multiplyBtn(){
+            temp = "";
+            temp = numValue;
+            numValue = "";
+            _input.innerText = temp;
+            _signs = "*";
+
+        }
+        function divideBtn(){
+            temp = "";
+            temp = numValue;
+            numValue = "";
+            _input.innerText = temp;
+            _signs = "/";
+
+        }
+        function equalBtn(){
+            if(_signs == "+"){
+                _input.innerText = Number(_input.innerText) + Number(temp);
+                use_function = true;
+            }else if(_signs == "-"){
+                _input.innerText = Number(_input.innerText) - Number(temp);
+                use_function = true;
+            }else if(_signs == "*"){
+                _input.innerText = Number(_input.innerText) * Number(temp);
+                use_function = true;
+            }else if(_signs == "/"){
+                _input.innerText = Number(_input.innerText) / Number(temp);
+                use_function = true;
+            }else{
+                _input.innerText = _input.innerText;
+                use_function = false;
+            }
+        }
+        
+    </script>
+</body>
+</html>
